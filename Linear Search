@@ -12,9 +12,11 @@ void main()
     printf("Enter the element to be searched\n");
     scanf("%d",&key);
     int flag=0;
+    int index=-1;
     for(int i=0;i<n;i++){
         if(a[i]==key){
             flag=1;
+            index=i;
             break;
         }
     }
@@ -22,6 +24,6 @@ void main()
         printf("Search key not found\n");
     }
     else{
-        printf("Search key found\n");
+        printf("Search key found at %d position",index+1);
     }
 }
