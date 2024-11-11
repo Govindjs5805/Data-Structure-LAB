@@ -1,0 +1,54 @@
+#include <stdio.h>
+int stack[20];
+int top=-1,n,m,item,choice;
+void push(){
+    printf("Enter the value to insert");
+    scanf("%d",&item);
+    if(top==n){
+        printf("Stack overflow");
+    }
+    else{
+        top=top+1;
+        stack[top]=item;
+    }
+}
+void pop(){
+    if(top==-1){
+        printf("Stack underflow");
+    }
+    else{
+        top=top-1;
+    }
+}
+void peek(){
+    printf("%d",stack[top]);
+}
+void display(){
+    if(top==-1){
+        printf("Stack empty");
+    }
+    else{
+    for(int i=top;i>=0;i--){
+        printf("%d",stack[i]);
+    }}
+}
+void main()
+{
+  printf("Enter the size of stack");
+  scanf("%d",&n);
+  do{
+      printf("Enter choice\n1.Push\n2.Pop\n3.Peek\n4.Display\n5.Exit");
+      scanf("%d",&choice);
+      switch(choice){
+          case 1:push();
+          break;
+          case 2:pop();
+          break;
+          case 3:peek();
+          break;
+          case 4:display();
+          break;
+          case 5:printf("Loop exited");
+      }
+      }while(choice!=5);
+}
