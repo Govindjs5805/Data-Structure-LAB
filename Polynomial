@@ -1,0 +1,133 @@
+#include <stdio.h>
+#include<stdlib.h>
+struct node{
+    int coeff;
+    int expo;
+    struct node *next;
+};
+struct node *new;
+struct node *head=NULL;
+struct node *ptr;
+struct node *Phead;
+struct node *Qhead;
+struct node *Rhead;
+struct node *P;
+struct node *Q;
+struct node *R;
+struct node *readpoly(){
+    int n;
+    struct node *head=NULL,*ptr=NULL;
+    printf("Enter the number of terms");
+    scanf("%d",&n);
+    for(int i=1;i<=n;i++){
+        new=(struct node *)malloc(sizeof(struct node));
+        printf("Enter coefficient");
+        scanf("%d",&new->coeff);
+        printf("Enter exponent");
+        scanf("%d",&new->expo);
+        new->next=NULL;
+    
+    if(head==NULL){
+       
+        head=new;
+         ptr=head;
+    }
+    else{
+        ptr->next=new;
+        ptr=new;
+    }}
+    return head;
+}
+struct node *addpoly(struct node *Phead,struct node *Qhead){
+    P=Phead;
+    Q=Qhead;
+    Rhead=NULL;
+    while(P!=NULL&&Q!=NULL){
+        if(P->expo==Q->expo){
+            new=(struct node *)malloc(sizeof(struct node));
+            new->coeff=P->coeff+Q->coeff;
+            new->expo=P->expo;
+            new->next=NULL;
+            P=P->next;
+            Q=Q->next;
+        }
+        else if(P->expo>Q->expo){
+            new=(struct node *)malloc(sizeof(struct node));
+            new->coeff=P->coeff;
+            new->expo=P->expo;
+            new->next=NULL;
+            P=P->next;
+        }
+        else{
+            new=(struct node *)malloc(sizeof(struct node));
+            new->coeff=Q->coeff;
+            new->expo=Q->expo;
+            new->next=NULL;
+            Q=Q->next;
+        }
+        if(Rhead==NULL){
+            Rhead=new;
+            R=new;
+        }
+        else{
+            R->next=new;
+            R=new;
+        }
+    }
+    while(P!=NULL){
+        new=(struct node *)malloc(sizeof(struct node));
+        new->coeff=P->coeff;
+        new->expo=P->expo;
+        new->next=NULL;
+        P=P->next;
+        if(Rhead==NULL){
+            Rhead=new;
+            R=new;
+        }
+        else{
+            R->next=new;
+            R=new;
+        }
+    }
+    while(Q!=NULL){
+        new=(struct node *)malloc(sizeof(struct node));
+        new->coeff=Q->coeff;
+        new->expo=Q->expo;new->next=NULL;
+        Q=Q->next;
+        if(Rhead==NULL){
+            Rhead=new;
+            R=new;
+        }
+        else{
+            R->next=new;
+            R=new;
+        }
+    }
+    return Rhead;
+}
+struct node *display(struct node *Rhead){
+    if(Rhead==NULL){
+        printf("Empty\n");
+    }
+    else{
+        ptr=Rhead;
+        while(ptr!=NULL){
+            printf("%d*x%d",ptr->coeff,ptr->expo);
+            if(ptr->next!=NULL){
+                printf("+");
+            }
+            ptr=ptr->next;
+        }
+        printf("\n");
+    }
+}
+void main()
+{
+printf("Enter the first polynomial");
+Phead=readpoly();
+printf("Enter the second polynomial");
+Qhead=readpoly();
+Rhead=addpoly(Phead,Qhead);
+printf("Resultant polynomial:\n");
+display(Rhead);
+}
