@@ -1,0 +1,71 @@
+#include <stdio.h>
+int f=-1,r=-1,n,item,choice,x;
+int q[20];
+void enqueue(int item){
+    if((r+1)%n==f){
+        printf("queue overflow");
+    }
+    else if(f==-1&&r==-1){
+        f=0;r=0;
+        q[r]=item;
+    }
+    else{
+        r=(r+1)%n;
+        q[r]=item;
+    }
+}
+void dequeue(){
+    if(f==-1&&r==-1){
+        printf("Queue is empty Cannot delete!\n");
+    }
+    else if(f==r){
+        f=-1;r=-1;
+    }
+    else{
+        f=(f+1)%n;
+    }
+  }
+void display(){
+    if(f==-1&&r==-1){
+        printf("Queue is empty");
+    }
+    else if(f<=r){
+        for(int i=f;i<=r;i++){
+            printf("%d",q[i]);
+        }
+    }
+    else{
+        for(int i=f;i<=n-1;i++){
+            printf("%d",q[i]);
+        }
+        for(int i=0;i<=r;i++){
+            printf("%d",q[i]);
+        }
+    }
+}
+void main()
+{
+printf("Enter the size of the queue");
+scanf("%d",&n);
+if(n<=0){
+    printf("Queue size must be greater than 0");
+}
+do{
+    printf("Enter your choice\n1.Enqueue\n2.Dequeue\n3.Display\n4.Loop exit\n");
+    scanf("%d",&choice);
+    switch(choice){
+        case 1:printf("Enter the element to be inserted");
+        scanf("%d",&x);
+        enqueue(x);
+        break;
+        
+        case 2:dequeue();
+        break;
+        
+        case 3:display();
+        break; 
+        
+        case 4:printf("Loop exited");
+    }
+}while(choice!=4);
+}
