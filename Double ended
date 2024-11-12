@@ -1,0 +1,111 @@
+#include <stdio.h>
+int f=-1,r=-1,n,item,choice,x;
+int q[20];
+void push(int item){
+    if(f==0&&r==n-1){
+       printf("Queue overflow");
+    }
+    else if(f==-1&&r==-1){
+        f=0;
+        r=0;
+        q[f]=item;
+    }
+    else if(f>0){
+        f=f-1;
+        q[f]=item;
+    }
+    else {
+        for(int i=r;i>=f;i--){
+            q[i+1]=q[i];
+        }
+        
+        q[f]=item;
+        r=r+1;
+    }}
+void pop(){
+    if(f==-1&&r==-1){
+        printf("Queue is empty");
+    }
+    else if(f==r){
+        f=-1;
+        r=-1;
+    }
+    else {
+        f=f+1;
+    }
+}
+void inject(int item){
+    if(f==0&&r==n-1){
+        printf("Queue is full");
+    }
+    else if(f==-1&&r==-1){
+        f=0;r=0;
+        q[r]=item;
+    }
+    else if(r<n-1){
+        r=r+1;
+        q[r]=item;
+    }
+    else {
+        for(int i=f;i<=r;i++){
+            q[i-1]=q[i];
+        }
+        q[r]=item;
+        f=f-1;
+    }
+}
+void reject(){
+    if(f==-1&&r==-1){
+        printf("Queue is empty");
+    }
+    else if(f==r){
+        f=-1;
+        r=-1;
+    }
+    else{
+        r=r-1;
+    }
+}
+void display(){
+    if(f==-1&&r==-1){
+        printf("Queue is empty");
+    }
+    else{
+        if(f<=r){
+        for(int i=f;i<=r;i++){
+            printf("%d",q[i]);
+        }
+    }}
+}
+void main()
+{
+printf("Enter the size of the queue");
+scanf("%d",&n);
+if(n<=0){
+    printf("Queue size must be greater than 0");
+}
+do{
+    printf("Enter your choice\n1.Push\n2.Pop\n3.Inject\n4.Reject\n5.Display\n6.Loop exit\n");
+    scanf("%d",&choice);
+    switch(choice){
+        case 1:printf("Enter the element to be inserted");
+        scanf("%d",&x);
+        push(x);
+        break;
+        
+        case 2:pop();
+        break;
+        
+        case 3:
+        printf("Enter the element");
+        scanf("%d",&x);
+        inject(x);
+        break; 
+        case 4:reject();
+        break;
+        case 5:display();
+        break;
+        case 6:printf("Loop exited");
+    }
+}while(choice!=6);
+}
